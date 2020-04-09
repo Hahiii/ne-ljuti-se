@@ -1,0 +1,25 @@
+.dies {
+  position: absolute;
+  top: calc(50% - 30px);
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 5px;
+  width: 60px;
+  height: 60px;
+
+  &.red {
+    background: rgba(255, 0, 0, 0.33);
+  }
+  &.blue {
+    background: rgba(0, 0, 255, 0.33);
+  }
+  &.green {
+    background: rgba(0, 128, 0, 0.33);
+  }
+  &.yellow {
+    background: rgba(255, 255, 0, 0.33);
+  }
+}

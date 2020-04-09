@@ -1,0 +1,41 @@
+.player {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid;
+  height: 220px;
+  width: 220px;
+  border-radius: 5px;
+
+  &.r {
+    background: rgba(255, 0, 0, 0.63);
+    bottom: 30px;
+    left: 30px;
+  }
+  &.b {
+    background: rgba(0, 0, 255, 0.63);
+    top: 30px;
+    right: 30px;
+  }
+  &.g {
+    background: rgba(0, 128, 0, 0.63);
+    bottom: 30px;
+    right: 30px;
+  }
+  &.y {
+    background: rgba(255, 255, 0, 0.63);
+    top: 30px;
+    left: 30px;
+  }
+
+  .stone {
+    border: 1px solid;
+    box-shadow: 0px 1px 2px 0.5px;
+    height: 60px;
+    width: 60px;
+    margin: 0px 20px;
+    border-radius: 50%;
+  }
+}
