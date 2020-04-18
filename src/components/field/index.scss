@@ -10,25 +10,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    flex: 1 1;
+    flex: 0 1 60px;
     height: 60px;
     border-radius: 100%;
 
     &.w {
-      background-color: rgba(255, 255, 255, 0.11);
-      border: 1px solid gray;
+      background-color: rgb(254, 254, 254);
+      border: 1px solid rgb(199, 199, 199);
 
       .x {
-        height: 30px;
-        max-width: 50%;
+        height: 20px;
+        max-width: 30%;
         box-shadow: 0 0 3px 1px;
       }
     }
 
     &.b {
-      background-color: rgba(0, 0, 255, 0.73);
-      border: 1px solid gray;
+      background-color: rgba(0, 132, 255, 0.6);
       .x {
         height: 30px;
         max-width: 50%;
@@ -37,8 +35,7 @@
     }
 
     &.r {
-      background-color: rgba(255, 0, 0, 0.73);
-      border: 1px solid gray;
+      background-color: rgba(255, 0, 0, 0.6);
       .x {
         height: 30px;
         max-width: 50%;
@@ -47,8 +44,7 @@
     }
 
     &.g {
-      background-color: rgba(0, 128, 0, 0.73);
-      border: 1px solid gray;
+      background-color: rgba(0, 128, 0, 0.6);
       .x {
         height: 30px;
         max-width: 50%;
@@ -57,8 +53,7 @@
     }
 
     &.y {
-      background-color: rgba(255, 255, 0, 0.73);
-      border: 1px solid gray;
+      background-color: rgba(255, 255, 0, 0.6);
       .x {
         height: 30px;
         max-width: 50%;
@@ -67,30 +62,23 @@
     }
 
     .x {
-      height: 50px;
-      width: 100%;
-      max-width: 90%;
-      border-radius: 100%;
       cursor: pointer;
+      border: none;
 
       &.b {
-        background-color: rgba(0, 0, 255, 0.73);
-        border: 2px solid rgba(1, 1, 84, 0.63);
+        background-color: rgba(0, 132, 255, 0.6);
       }
 
       &.r {
-        background-color: rgba(255, 0, 0, 0.73);
-        border: 2px solid rgba(83, 1, 1, 0.63);
+        background-color: rgba(255, 0, 0, 0.6);
       }
 
       &.g {
-        background-color: rgba(0, 128, 0, 0.73);
-        border: 2px solid rgba(1, 71, 1, 0.63);
+        background-color: rgba(0, 128, 0, 0.6);
       }
 
       &.y {
-        background-color: rgba(255, 255, 0, 0.73);
-        border: 2px solid rgba(78, 78, 1, 0.63);
+        background-color: rgba(255, 255, 0, 0.6);
       }
     }
   }

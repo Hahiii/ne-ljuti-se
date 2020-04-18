@@ -17,8 +17,8 @@ import Dice from './components/dies';
 function App({ playerColor }) {
   return (
     <div className="App">
+      <h1>Player: <span style={{ color: playerColor }}>{playerColor}</span></h1>
       <div>
-        <h1>Player: <span style={{ color: playerColor }}>{playerColor}</span></h1>
         {playerColor && <Dice
           playing={playerColor ? playerColor : ""}
         // stones={stones}

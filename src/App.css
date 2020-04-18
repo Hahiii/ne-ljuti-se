@@ -1,17 +1,15 @@
 .App {
   display: flex;
+  flex-direction: column;
   position: relative;
   width: 100vw;
   height: 100vh;
-  justify-content: center;
   align-items: center;
 }
 
 h1 {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  width: 250px;
+  margin: 0;
+  padding: 30px;
 }
 
 h1 span {
