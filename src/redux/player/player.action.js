@@ -22,10 +22,5 @@ export const setFieldArray = payload => ({
   payload,
 });
 
-// export const setFieldArray = payload => ({
-//   type: PlayerActionTypes.SET_STONES,
-//   payload,
-// });
-
 
 

@@ -7,7 +7,7 @@ import { playerReducer } from './player/player.reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['player']
+  whitelist: ['']
 }
 
 const rootReducer = combineReducers({

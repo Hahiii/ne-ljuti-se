@@ -7,15 +7,27 @@ function Field({ id, onClick, field, row }) {
     <div className="field-container field">
       <span className={`field ${field.color}`} id={id}>
         {
-          field.x ? <span className={`field x ${field.x}`}
-            data-type={field.x}
-            data-row={row}
-            data-index={id}
-            data-stoneId={field.stoneId}
-            onClick={(event) => {
-              if (typeof (onClick) === "function") onClick(event.target.dataset)
-            }}
-          > </span> : null
+          field.x ? typeof (field.x) !== "object" ?
+            <span className={`field x ${field.x}`}
+              data-type={field.x}
+              data-row={row}
+              data-index={id}
+              data-stoneid={field.stoneId}
+              onClick={(event) => {
+                if (typeof (onClick) === "function") onClick(event.target.dataset)
+              }}
+            > </span> : field.x.map((item, index) => {
+              return (<span className={`field x ${item.x}`}
+                data-type={item.x}
+                data-row={row}
+                data-index={id}
+                data-stoneid={item.stoneId}
+                key={index}
+                onClick={(event) => {
+                  if (typeof (onClick) === "function") onClick(event.target.dataset)
+                }}
+              > </span>)
+            }) : null
         }
       </span>
     </div >
