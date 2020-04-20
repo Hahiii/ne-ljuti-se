@@ -21,3 +21,8 @@ export const selectFieldArray = createSelector(
   [selectPlayer],
   player => player.fieldArr
 );
+
+export const selectDiceUrl = createSelector(
+  [selectPlayer],
+  player => player.setDiceUrl
+);

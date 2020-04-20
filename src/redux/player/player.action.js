@@ -22,5 +22,10 @@ export const setFieldArray = payload => ({
   payload,
 });
 
+export const setDiceUrl = payload => ({
+  type: PlayerActionTypes.SET_DICE_URL,
+  payload,
+});
+
 
 
