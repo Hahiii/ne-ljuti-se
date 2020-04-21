@@ -1,41 +1,105 @@
 .player {
+  padding: 0px 10px;
+  font-size: 36px;
+
+  &.r {
+    color: rgba(255, 0, 0, 0.568);
+  }
+
+  &.b {
+    color: rgba(2, 97, 240, 0.568);
+  }
+
+  &.g {
+    color: rgba(12, 126, 12, 0.568);
+  }
+
+  &.y {
+    color: rgb(255, 242, 2);
+  }
+}
+
+.get-names-container {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  border: 1px solid;
-  height: 220px;
-  width: 220px;
-  border-radius: 5px;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background: rgba(240, 245, 235, 0.329);
+  height: 100vh;
+  width: 100vw;
 
-  &.r {
-    background: rgba(255, 0, 0, 0.178);
-    bottom: 30px;
-    left: 30px;
-  }
-  &.b {
-    background: rgba(0, 0, 255, 0.63);
-    top: 30px;
-    right: 30px;
-  }
-  &.g {
-    background: rgba(0, 128, 0, 0.63);
-    bottom: 30px;
-    right: 30px;
-  }
-  &.y {
-    background: rgba(255, 255, 0, 0.63);
-    top: 30px;
-    left: 30px;
+  label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    &.r {
+      color: rgba(255, 0, 0, 0.568);
+      position: absolute;
+      bottom: 100px;
+      left: 20px;
+    }
+    &.y {
+      color: rgb(255, 242, 2);
+      position: absolute;
+      top: 100px;
+      left: 20px;
+    }
+    &.b {
+      color: rgba(2, 97, 240, 0.568);
+      position: absolute;
+      top: 100px;
+      right: 20px;
+    }
+    &.g {
+      color: rgba(12, 126, 12, 0.568);
+      position: absolute;
+      bottom: 100px;
+      right: 20px;
+    }
   }
 
-  .stone {
-    border: 1px solid;
-    box-shadow: 0px 1px 2px 0.5px;
-    height: 60px;
-    width: 60px;
-    margin: 0px 20px;
-    border-radius: 50%;
+  input {
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bolder;
+
+    &.r {
+      border: 1px solid rgba(255, 0, 0, 0.568);
+    }
+    &.y {
+      border: 1px solid rgb(255, 242, 2);
+    }
+    &.b {
+      border: 1px solid rgba(2, 97, 240, 0.568);
+    }
+    &.g {
+      border: 1px solid rgba(12, 126, 12, 0.568);
+    }
+  }
+
+  .start {
+    padding: 16px 32px;
+    border-top: 10px solid rgb(255, 242, 2);
+    border-right: 10px solid rgba(2, 97, 240, 0.568);
+    border-bottom: 10px solid rgba(12, 126, 12, 0.568);
+    border-left: 10px solid rgba(255, 0, 0, 0.568);
+    border-radius: 4px;
+    font-size: 20px;
+    transition: 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: inset 0 0 1em rgba(0, 0, 0, 0.139);
+    }
+  }
+
+  .btn {
+    padding: 5px;
+    letter-spacing: 2px;
+    cursor: pointer;
   }
 }

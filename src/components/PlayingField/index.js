@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import  uuid from 'react-uuid';
 
 import Field from '../field';
 
@@ -16,7 +17,6 @@ function PlayingField({ updateFieldArray, updateDiceUrl, updatePlayerColor, fiel
   let canMoveFromHome = false;
   let nextPlayer;
   const newArr = [...fieldArr];
-
   const handleClick = (stone) => {
     let playerFigures = [...playerStones[stone.type].stones];
     if (stone.type === playerColor && diceNum) {
@@ -26,64 +26,57 @@ function PlayingField({ updateFieldArray, updateDiceUrl, updatePlayerColor, fiel
         row.map((fields, indexFields) => {
           if (fields.start === stone.type && playerFigures[stone.stoneid - 1].steps === 0 && diceNum === 6) {
             let xArr = fields.x !== "" ? fields.x.filter((item) => item.x === stone.type) : [];
-            if (!xArr.length || fields.start === stone.type && fields.x === "") {
+            if (!xArr.length || (fields.start === stone.type && fields.x === "")) {
               if (fields.x.length) {
                 if (kickPlayerAtHome(fields, fieldClicked)) {
                   fields = { ...fields, x: [{ x: fieldClicked.x, stoneId: fieldClicked.stoneId }] };
                   newArr[indexRow][indexFields] = { ...fields };
                   playerFigures[stone.stoneid - 1].steps = 1;
                   canMove = true;
-                  return;
+                  return true
                 }
               }
-              console.log("i got a 6");
               fields.x.push({ x: fieldClicked.x, stoneId: fieldClicked.stoneId })
               fields = { ...fields, x: [...fields.x,] };
               // fieldClicked = { ...fieldClicked, x: "" };
               newArr[indexRow][indexFields] = { ...fields };
-              console.log(stone.stoneid);
               playerFigures[stone.stoneid - 1].steps = 1;
-              console.log("after playing the 6", newArr[indexRow][indexFields]);
               canMove = true;
-              return;
+              return true;
             }
           }
           if (playerFigures[stone.stoneid - 1].steps + diceNum <= 40) {
-            if (fields.p === (fieldClicked.p + numberThrown) || fields.p === (fieldClicked.p + numberThrown) - 40 && fields.x !== stone.type) {
+            if (fields.p === (fieldClicked.p + numberThrown) || (fields.p === (fieldClicked.p + numberThrown) - 40 && fields.x !== stone.type)) {
               if (fields.x === "" && !Array.isArray(fields.x)) {
                 if (Array.isArray(fieldClicked.x)) {
-                  // console.log("i clicked on a obj", newArr[stone.row][stone.index], stone);
                   fields = { ...fields, x: stone.type, stoneId: stone.stoneid };
                   newArr[indexRow][indexFields] = { ...fields };
                   canMove = true;
                   canMoveFromHome = true;
-                  console.log(stone.stoneid);
                   playerFigures[stone.stoneid - 1].steps += diceNum;
-
-                  return;
+                  return true;
                 };
+
                 fields = { ...fields, x: stone.type, stoneId: stone.stoneid };
                 newArr[indexRow][indexFields] = { ...fields };
                 canMove = true;
-                console.log(stone.stoneid);
                 playerFigures[stone.stoneid - 1].steps += diceNum;
-                return;
+                return true;
               }
+
               if (fields.x !== "") {
                 if (kickPlayerWalking(fields, stone)) {
                   canMove = true;
+                  return true;
                 }
               }
               if (Array.isArray(fields.x)) {
-                console.log("next field is obj");
                 fields.x.push({ x: fieldClicked.x, stoneId: fieldClicked.stoneId })
                 fields = { ...fields, x: [...fields.x,] };
                 newArr[indexRow][indexFields] = { ...fields };
-                canMove = true;
-                console.log(playerFigures[stone.stoneid - 1].steps, diceNum, "=");
                 playerFigures[stone.stoneid - 1].steps += diceNum;
-
-                return;
+                canMove = true;
+                return true;
               }
             }
           } else {
@@ -92,11 +85,13 @@ function PlayingField({ updateFieldArray, updateDiceUrl, updatePlayerColor, fiel
               fields = { ...fields, x: playerColor };
               newArr[indexRow][indexFields] = { ...fields };
               canMove = true;
-              return;
+              return true;
             }
 
           }
+          return true;
         })
+        return true;
       })
 
       if (canMove) {
@@ -132,7 +127,9 @@ function PlayingField({ updateFieldArray, updateDiceUrl, updatePlayerColor, fiel
             newArr[indexRow][indexFields] = { ...fields };
             playerFigures[kickedPlayers.x[i].stoneId - 1].steps = 0;
           }
+          return true;
         })
+        return true;
       })
     }
     return true;
@@ -151,7 +148,9 @@ function PlayingField({ updateFieldArray, updateDiceUrl, updatePlayerColor, fiel
           fields = { ...fields, x: player.type };
           newArr[indexRow][indexFields] = { ...fields };
         }
+        return true;
       })
+      return true;
     })
     return true;
   }
@@ -164,7 +163,7 @@ function PlayingField({ updateFieldArray, updateDiceUrl, updatePlayerColor, fiel
             return (
               <>
                 <Field
-                  key={index}
+                  key={uuid()}
                   id={index}
                   row={rowIndex}
                   color={field.color ? field.color : field.x}

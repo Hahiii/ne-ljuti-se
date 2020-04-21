@@ -26,7 +26,6 @@ function Dice({ updatePlayerColor, updateDiceUrl, playerColor, playerStones, thr
     "5": five,
     "6": six
   }
-  console.log(diceUrl);
   const handleClick = () => {
     let stonesAtHome = playerStones[playerColor].stones.filter((item) => item.steps === 0);
     let players = ["y", "b", "g", "r"];

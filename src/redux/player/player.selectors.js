@@ -26,3 +26,13 @@ export const selectDiceUrl = createSelector(
   [selectPlayer],
   player => player.setDiceUrl
 );
+
+export const selectGameStart = createSelector(
+  [selectPlayer],
+  player => player.gameStart
+);
+
+export const selectPlayersName = createSelector(
+  [selectPlayer],
+  player => player.playersName
+);

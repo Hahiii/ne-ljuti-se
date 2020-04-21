@@ -27,5 +27,15 @@ export const setDiceUrl = payload => ({
   payload,
 });
 
+export const setGameStart = payload => ({
+  type: PlayerActionTypes.SET_GAME_START,
+  payload,
+});
+
+export const setPlayersName = payload => ({
+  type: PlayerActionTypes.SET_PLAYERS_NAME,
+  payload,
+});
+
 
 

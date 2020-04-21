@@ -19,6 +19,8 @@ const INITIAL_STATE = {
   },
   turnPlayer: "r",
   setDiceUrl: "",
+  gameStart: false,
+  playersName: {},
   fieldArr: [
     [{ "": "", "": "", "": "" }, { "": "", "": "", "": "" }, { "": "", "": "", "": "" }, { "": "", "": "", "": "" }, { color: "w", x: "", p: 9 }, { color: "w", x: "", p: 10 }, { color: "b", x: [], p: 11, start: "b" }, { "": "", "": "", "": "" }, { "": "", "": "", "": "" }, { "": "", "": "", "": "" }, { "": "", "": "", "": "" }],
     [{ "": "", "": "", "": "" }, { x: "y", stoneId: 1, y: "start" }, { x: "y", stoneId: 3, y: "start" }, { "": "", "": "", "": "" }, { color: "w", x: "", p: 8 }, { color: "b", x: "", home: 1 }, { color: "w", x: "", p: 12 }, { "": "", "": "", "": "" }, { x: "b", stoneId: 1, b: "start" }, { x: "b", stoneId: 3, b: "start" }, { "": "", "": "", "": "" }],
@@ -62,6 +64,16 @@ export const playerReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         setDiceUrl: action.payload
+      }
+    case PlayerActionTypes.SET_GAME_START:
+      return {
+        ...state,
+        gameStart: action.payload
+      }
+    case PlayerActionTypes.SET_PLAYERS_NAME:
+      return {
+        ...state,
+        playersName: { ...action.payload }
       }
     default:
       return state;
