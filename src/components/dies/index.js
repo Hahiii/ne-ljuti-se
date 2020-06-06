@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-import { setDiceNumber, setPlayerColor, setDiceUrl } from '../../redux/player/player.action';
-import { selectPlayerColor, selectPlayerStones, selectDiceUrl } from '../../redux/player/player.selectors';
+import {
+  setDiceNumber,
+  setPlayerColor,
+  setDiceUrl,
+} from "../../redux/player/player.action";
+import {
+  selectPlayerColor,
+  selectPlayerStones,
+  selectDiceUrl,
+} from "../../redux/player/player.selectors";
 
-import './index.scss';
-import zero from '../../images/zero.png'
-import one from '../../images/one.png'
-import two from '../../images/two.png'
-import three from '../../images/three.png'
-import four from '../../images/four.png'
-import five from '../../images/five.png'
-import six from '../../images/six.png'
+import "./index.scss";
+import zero from "../../images/zero.png";
+import one from "../../images/one.png";
+import two from "../../images/two.png";
+import three from "../../images/three.png";
+import four from "../../images/four.png";
+import five from "../../images/five.png";
+import six from "../../images/six.png";
 
-function Dice({ updatePlayerColor, updateDiceUrl, playerColor, playerStones, throwDice, diceUrl }) {
+function Dice({
+  updatePlayerColor,
+  updateDiceUrl,
+  playerColor,
+  playerStones,
+  throwDice,
+  diceUrl,
+}) {
   const [animation, setAnimation] = useState(false);
   let number = 0;
   let diceUrlArr = {
@@ -24,18 +39,22 @@ function Dice({ updatePlayerColor, updateDiceUrl, playerColor, playerStones, thr
     "3": three,
     "4": four,
     "5": five,
-    "6": six
-  }
+    "6": six,
+  };
   const handleClick = () => {
-    let stonesAtHome = playerStones[playerColor].stones.filter((item) => item.steps === 0);
+    let stonesAtHome = playerStones.stones.filter((item) => item.steps === 0)
+      .length;
+
+    stonesAtHome += playerStones.atHome;
     let players = ["y", "b", "g", "r"];
     let nextPlayer;
 
     setAnimation(true);
-    if (stonesAtHome.length === 4) {
+    if (stonesAtHome === 4) {
       let i = 0;
       while (i < 3) {
         number = Math.ceil(Math.random() * 6);
+        // number = 6;
         if (number === 6) {
           i = 3;
         }
@@ -43,26 +62,32 @@ function Dice({ updatePlayerColor, updateDiceUrl, playerColor, playerStones, thr
       }
       if (number !== 6) {
         setTimeout(() => {
-          updateDiceUrl("")
-          players[players.length - 1] === playerColor ? nextPlayer = players[0] : nextPlayer = players[players.indexOf(playerColor) + 1];
-          updatePlayerColor(nextPlayer)
-        }, 2000)
+          updateDiceUrl("");
+          players[players.length - 1] === playerColor
+            ? (nextPlayer = players[0])
+            : (nextPlayer = players[players.indexOf(playerColor) + 1]);
+          updatePlayerColor(nextPlayer);
+        }, 2000);
       }
     } else {
-      number = Math.ceil(Math.random() * 6)
+      number = Math.ceil(Math.random() * 6);
+      // number = 6
     }
-    throwDice(number)
+    throwDice(number);
     setTimeout(() => {
-      updateDiceUrl(getDiceNumberUrl(number))
+      updateDiceUrl(getDiceNumberUrl(number));
     }, 1200);
-  }
+  };
   const getDiceNumberUrl = (num) => {
     return diceUrlArr[`${num}`];
-  }
+  };
   return (
     <div
       className={`dies ${playerColor} ${animation ? "animation" : null}`}
-      onClick={() => { handleClick() }}>
+      onClick={() => {
+        handleClick();
+      }}
+    >
       <span
         className={`${playerColor} ${animation ? "animation" : null}`}
         onAnimationEnd={() => setAnimation(false)}
@@ -70,20 +95,19 @@ function Dice({ updatePlayerColor, updateDiceUrl, playerColor, playerStones, thr
         <img src={diceUrl ? diceUrl : zero} alt={diceUrl.toString()} />
       </span>
     </div>
-  )
+  );
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   throwDice: (num) => dispatch(setDiceNumber(num)),
   updatePlayerColor: (color) => dispatch(setPlayerColor(color)),
-  updateDiceUrl: (newDiceUrl) => dispatch(setDiceUrl(newDiceUrl))
+  updateDiceUrl: (newDiceUrl) => dispatch(setDiceUrl(newDiceUrl)),
 });
 
 const mapStateToProps = createStructuredSelector({
   playerColor: selectPlayerColor,
   playerStones: selectPlayerStones,
-  diceUrl: selectDiceUrl
+  diceUrl: selectDiceUrl,
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dice);

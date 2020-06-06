@@ -1,38 +1,38 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
-const selectPlayer = state => state.player;
+const selectPlayer = (state) => state.player;
 
 export const selectPlayerColor = createSelector(
   [selectPlayer],
-  player => player.turnPlayer
+  (player) => player.turnPlayer
 );
 
 export const selectPlayerStones = createSelector(
   [selectPlayer],
-  player => player
+  (player) => player[player.turnPlayer]
 );
 
 export const selectPlayerDiceNumber = createSelector(
   [selectPlayer],
-  player => player.diceNumber
+  (player) => player.diceNumber
 );
 
 export const selectFieldArray = createSelector(
   [selectPlayer],
-  player => player.fieldArr
+  (player) => player.fieldArr
 );
 
 export const selectDiceUrl = createSelector(
   [selectPlayer],
-  player => player.setDiceUrl
+  (player) => player.setDiceUrl
 );
 
 export const selectGameStart = createSelector(
   [selectPlayer],
-  player => player.gameStart
+  (player) => player.gameStart
 );
 
 export const selectPlayersName = createSelector(
   [selectPlayer],
-  player => player.playersName
+  (player) => player.playersName
 );

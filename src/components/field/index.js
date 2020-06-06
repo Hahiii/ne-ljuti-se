@@ -1,5 +1,5 @@
 import React from 'react';
-import  uuid from 'react-uuid';
+import uuid from 'react-uuid';
 
 import './index.scss';
 
