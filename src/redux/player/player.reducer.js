@@ -1,41 +1,43 @@
 import { PlayerActionTypes } from "./player.types";
 
 const INITIAL_STATE = {
-  r: {
-    stones: [
-      { steps: 0, stoneId: 1 },
-      { steps: 0, stoneId: 2 },
-      { steps: 0, stoneId: 3 },
-      { steps: 0, stoneId: 4 },
-    ],
-    atHome: 0,
-  },
-  b: {
-    stones: [
-      { steps: 0, stoneId: 1 },
-      { steps: 0, stoneId: 2 },
-      { steps: 0, stoneId: 3 },
-      { steps: 0, stoneId: 4 },
-    ],
-    atHome: 0,
-  },
-  y: {
-    stones: [
-      { steps: 0, stoneId: 1 },
-      { steps: 0, stoneId: 2 },
-      { steps: 0, stoneId: 3 },
-      { steps: 0, stoneId: 4 },
-    ],
-    atHome: 0,
-  },
-  g: {
-    stones: [
-      { steps: 0, stoneId: 1 },
-      { steps: 0, stoneId: 2 },
-      { steps: 0, stoneId: 3 },
-      { steps: 0, stoneId: 4 },
-    ],
-    atHome: 0,
+  playersState: {
+    r: {
+      stones: [
+        { steps: 0, stoneId: 1 },
+        { steps: 0, stoneId: 2 },
+        { steps: 0, stoneId: 3 },
+        { steps: 0, stoneId: 4 },
+      ],
+      atHome: 0,
+    },
+    b: {
+      stones: [
+        { steps: 0, stoneId: 1 },
+        { steps: 0, stoneId: 2 },
+        { steps: 0, stoneId: 3 },
+        { steps: 0, stoneId: 4 },
+      ],
+      atHome: 0,
+    },
+    y: {
+      stones: [
+        { steps: 0, stoneId: 1 },
+        { steps: 0, stoneId: 2 },
+        { steps: 0, stoneId: 3 },
+        { steps: 0, stoneId: 4 },
+      ],
+      atHome: 0,
+    },
+    g: {
+      stones: [
+        { steps: 0, stoneId: 1 },
+        { steps: 0, stoneId: 2 },
+        { steps: 0, stoneId: 3 },
+        { steps: 0, stoneId: 4 },
+      ],
+      atHome: 0,
+    },
   },
   turnPlayer: "r",
   setDiceUrl: "",

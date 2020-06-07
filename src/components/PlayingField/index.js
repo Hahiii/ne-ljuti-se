@@ -40,33 +40,8 @@ function PlayingField({
   const handleClick = (stone) => {
     if (stone.x[0].player === playerColor) {
       if (stone.location === "start" && diceNum === 6) {
-        let newArr = startRound(stone, fieldArr, playerColor);
-        if (newArr.length) {
-          let playerFigures = [
-            ...playerStones.stones,
-            playerStones.stones[Number(stone.x[0].stoneId - 1)].steps++,
-          ];
-          updateFieldArray(newArr);
-          if (diceNum !== 6) {
-            players[players.length - 1] === playerColor
-              ? (nextPlayer = players[0])
-              : (nextPlayer = players[players.indexOf(playerColor) + 1]);
-            updatePlayerColor(nextPlayer);
-            updateDiceUrl("");
-          }
-        }
-        return;
-      }
-      console.log("lets walk");
-      let newArr = walking(stone, fieldArr, diceNum);
-      if (newArr.length) {
-        let playerFigures = [
-          ...playerStones.stones,
-          (playerStones.stones[
-            Number(stone.x[0].stoneId - 1)
-          ].steps += diceNum),
-        ];
-        // updateStones(playerFigures);
+        console.log(playerStones);
+        let newArr = startRound(stone, fieldArr, playerColor, playerStones);
         updateFieldArray(newArr);
         if (diceNum !== 6) {
           players[players.length - 1] === playerColor
@@ -75,6 +50,17 @@ function PlayingField({
           updatePlayerColor(nextPlayer);
           updateDiceUrl("");
         }
+        return;
+      }
+      console.log("lets walk");
+      let newArr = walking(stone, fieldArr, playerColor, diceNum, playerStones);
+      updateFieldArray(newArr);
+      if (diceNum !== 6) {
+        players[players.length - 1] === playerColor
+          ? (nextPlayer = players[0])
+          : (nextPlayer = players[players.indexOf(playerColor) + 1]);
+        updatePlayerColor(nextPlayer);
+        updateDiceUrl("");
       }
     }
   };

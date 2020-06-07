@@ -1,32 +1,64 @@
-import localStorage from "redux-persist/es/storage";
-
-export function startRound(pijuni, field, color) {
+export function startRound(pijuni, field, color, playerStones) {
   let locationObj = checkPosition("start", pijuni, field);
   if (locationObj) {
     if (locationObj.kick.length) {
-      let newArr = kick(locationObj.kick, field);
-      return moveOn("start", pijuni, color, newArr, locationObj);
+      let newArr = kick(locationObj.kick, field, playerStones);
+      return moveOn("start", pijuni, color, newArr, locationObj, playerStones);
     }
-    return moveOn("start", pijuni, color, field, locationObj);
+    return moveOn("start", pijuni, color, field, locationObj, playerStones);
   }
   return false;
 }
 
-export function walking(pijuni, field, diceNumber) {
+export function walking(pijuni, field, color, diceNumber, playerStones) {
   let locationObj = checkPosition("walk", pijuni, field, diceNumber);
-  console.log(locationObj);
   if (locationObj) {
     if (locationObj.kick.length) {
-      let newArr = kick(locationObj.kick, field);
-      return moveOn("walk", pijuni, "", newArr, locationObj);
+      let newArr = kick(locationObj.kick, field, playerStones);
+      return moveOn(
+        "walk",
+        pijuni,
+        color,
+        newArr,
+        locationObj,
+        playerStones,
+        diceNumber
+      );
     }
-    return moveOn("walk", pijuni, "", field, locationObj);
+    return moveOn(
+      "walk",
+      pijuni,
+      color,
+      field,
+      locationObj,
+      playerStones,
+      diceNumber
+    );
   }
   return false;
 }
 
-function moveOn(action, pijuni, color, field, locationObj) {
+function moveOn(
+  action,
+  pijuni,
+  color,
+  field,
+  locationObj,
+  playerStones,
+  diceNumber
+) {
   let newArr;
+  console.log(playerStones[color], diceNumber, pijuni);
+
+  playerStones[color].stones.map((stones) => {
+    if (
+      stones.stoneId === pijuni.stoneId ||
+      stones.stoneId === pijuni.x[0].stoneId
+    ) {
+      !diceNumber ? stones.steps++ : (stones.steps += diceNumber);
+    }
+    return stones;
+  });
   switch (action) {
     case "start":
       newArr = field.map((row, rowIndex) =>
@@ -70,11 +102,17 @@ function moveOn(action, pijuni, color, field, locationObj) {
 
 // export function getHome() {}
 
-export function kick(toKick, field) {
+export function kick(toKick, field, playerStones) {
   let newArr;
   toKick.forEach((element) => {
-    newArr = field.map((row, rowIndex) => {
-      return row.map((fields, fieldIndex) => {
+    playerStones[element.player].stones.map((stones) => {
+      if (stones.stoneId === element.stoneId) {
+        return (stones.steps = 0);
+      }
+      return stones;
+    });
+    newArr = field.map((row) => {
+      return row.map((fields) => {
         if (
           fields.stoneId === element.stoneId &&
           fields.color === element.player

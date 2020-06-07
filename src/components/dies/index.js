@@ -26,7 +26,7 @@ function Dice({
   updatePlayerColor,
   updateDiceUrl,
   playerColor,
-  playerStones,
+  playersStones,
   throwDice,
   diceUrl,
 }) {
@@ -42,10 +42,11 @@ function Dice({
     "6": six,
   };
   const handleClick = () => {
-    let stonesAtHome = playerStones.stones.filter((item) => item.steps === 0)
-      .length;
+    let stonesAtHome = playersStones[playerColor].stones.filter(
+      (item) => item.steps === 0
+    ).length;
 
-    stonesAtHome += playerStones.atHome;
+    stonesAtHome += playersStones[playerColor].atHome;
     let players = ["y", "b", "g", "r"];
     let nextPlayer;
 
@@ -78,6 +79,7 @@ function Dice({
       updateDiceUrl(getDiceNumberUrl(number));
     }, 1200);
   };
+
   const getDiceNumberUrl = (num) => {
     return diceUrlArr[`${num}`];
   };
@@ -106,7 +108,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = createStructuredSelector({
   playerColor: selectPlayerColor,
-  playerStones: selectPlayerStones,
+  playersStones: selectPlayerStones,
   diceUrl: selectDiceUrl,
 });
 

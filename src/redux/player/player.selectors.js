@@ -9,7 +9,7 @@ export const selectPlayerColor = createSelector(
 
 export const selectPlayerStones = createSelector(
   [selectPlayer],
-  (player) => player[player.turnPlayer]
+  (player) => player.playersState
 );
 
 export const selectPlayerDiceNumber = createSelector(
