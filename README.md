@@ -1,5 +1,7 @@
 # Ludo
 
+![ludo game](ludo-game.png)
+
 ## Setup
 
 Make sure you have node installed, then run `npm install`.
